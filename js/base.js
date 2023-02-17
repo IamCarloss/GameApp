@@ -59,16 +59,15 @@ const ocultbd = document.getElementById('oculBD');
 /* otro elemento */
 const tabla_base = document.getElementById('tabla_base');
 const divtabla = document.getElementById('tabla_db');
-const juegovr = document.getElementById('jue');
+const juegovr = document.getElementById('juevv');
 
 
 juegovr.addEventListener('click', function(){
-  document.getElementById('jue').style.display = "block"
+  document.getElementById('juego').style.display = "block"
 
 })
 
 
-console.log(object);
 /* crear sesion */
 crear.addEventListener('click', function () {
     createUserWithEmailAndPassword(auth, email.value, pass.value)
@@ -364,7 +363,7 @@ ocult_btn.addEventListener('click', function (){
                         nombre: Edd.value,
                         logitud:document.getElementById('lng-lat').value,
                         latitud:document.getElementById('lng-long').value,
-                        puntuacion:document.getElementById('scoree').value 
+                        puntuacion:score
                       
                         
                     });
