@@ -2,7 +2,12 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebas
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider  } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
 import {collection, addDoc, doc, setDoc, getDoc, updateDoc, getDocs, deleteDoc  } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
-/*  */
+
+
+// Luego, en algún lugar del código, puedes llamar a la función para obtener el puntaje final
+
+
+
 
 
 const firebaseConfig = {
@@ -31,9 +36,7 @@ const pass = document.getElementById('pass');
 /* formulario */
 const NombreCom = document.getElementById('nomCom');
 const Edd = document.getElementById('edad');
-const genero = document.getElementById('gene');
-const numero = document.getElementById('num');
-const correo = document.getElementById('correo');
+
 /* inputs utilizados  */
 /* const ubicacion = document.getElementById('ubi');
 const ubicacion2 = document.getElementById('ubi2');
@@ -44,26 +47,28 @@ const logoogle = document.getElementById('logoogle');
 const login = document.getElementById('login');
 const cerrar = document.getElementById('cerrar');
 const facebook = document.getElementById('facebook');
-const guardar = document.getElementById('guar');
-const modificar = document.getElementById('mod');
 const mostrar = document.getElementById('mos');
 const STATUS = document.getElementById('verBD');
 const crearbtn = document.getElementById('creardn');
 const carguar = document.getElementById('car-guar');
 const borrar = document.getElementById('borrar');
 const ocult_btn = document.getElementById('ocul');
-const Github = document.getElementById('git');
-const ocultbd = document.getElementById('oculBD')
+const Github = document.getElementById('github');
 
-
+const ocultbd = document.getElementById('oculBD');
 /* otro elemento */
 const tabla_base = document.getElementById('tabla_base');
 const divtabla = document.getElementById('tabla_db');
-
-/* parrafo */
-document.getElementById("pp");
+const juegovr = document.getElementById('jue');
 
 
+juegovr.addEventListener('click', function(){
+  document.getElementById('jue').style.display = "block"
+
+})
+
+
+console.log(object);
 /* crear sesion */
 crear.addEventListener('click', function () {
     createUserWithEmailAndPassword(auth, email.value, pass.value)
@@ -94,7 +99,7 @@ crear.addEventListener('click', function () {
           });
 
 
-
+          
 
 /* iniciar sesion */
 login.addEventListener("click", function(){
@@ -111,8 +116,7 @@ signInWithEmailAndPassword(auth, email.value, pass.value)
     document.getElementById('pass').style.visibility  = 'hidden';
     document.getElementById('logoogle').style.visibility  = 'hidden';
     document.getElementById('facebook').style.visibility  = 'hidden';
-    
-    document.getElementById('git').style.visibility  = 'hiden';
+    document.getElementById('github').style.visibility  = 'hiden';
     
   })
   .catch((error) => {
@@ -139,7 +143,7 @@ signOut(auth).then(() => {
   document.getElementById('pass').style.visibility  = 'visible';
   document.getElementById('logoogle').style.visibility  = 'visible';
   document.getElementById('facebook').style.visibility  = 'visible';
-  document.getElementById('git').style.visibility  = 'visible';
+  document.getElementById('github').style.visibility  = 'hiden';
 
 
 }).catch((error) => {
@@ -168,7 +172,8 @@ signInWithPopup(auth, providerGoogle)
     document.getElementById('pass').style.visibility  = 'hidden';
     document.getElementById('logoogle').style.visibility  = 'hidden';
     document.getElementById('facebook').style.visibility  = 'hidden';
-    document.getElementById('git').style.visibility  = 'hidden';
+    document.getElementById('github').style.visibility = 'hidden';
+
     
 
     // ...
@@ -210,7 +215,7 @@ facebook.addEventListener('click', function(){
     document.getElementById('pass').style.visibility  = 'hidden';
     document.getElementById('logoogle').style.visibility  = 'hidden';
     document.getElementById('facebook').style.visibility  = 'hidden';
-    document.getElementById('git').style.visibility  = 'hiden';
+    document.getElementById('github').style.visibility  = 'hiden';
     // ...
   })
   .catch((error) => {
@@ -241,7 +246,7 @@ facebook.addEventListener('click', function(){
             document.getElementById('pass').style.visibility  = 'hidden';
             document.getElementById('logoogle').style.visibility  = 'hidden';
             document.getElementById('facebook').style.visibility  = 'hidden';
-            document.getElementById('git').style.visibility  = 'hiden';
+            document.getElementById('github').style.visibility  = 'hiden';
 
             // The signed-in user info.
             const user = result.user;
@@ -293,93 +298,88 @@ ocult_btn.addEventListener('click', function (){
 
 
  mostrar.addEventListener("click", function  () {
-  document.getElementById("mos") .style.display = "none"
-  document.getElementById("ocul") .style.display = "block"
-  document.getElementById("map") .style.display = "block"
-  document.getElementById('map').style.visibility = "visible";
-  mapboxgl.accessToken = 'pk.eyJ1IjoiaWFtY2FybG9zZnQiLCJhIjoiY2xkdnV2cmF5MDE3bDNvanFmcGRqZ2d4cCJ9.ohJtRP33084CwLYUx-NT_w';
-  const map = new mapboxgl.Map({
-    container: 'map', // container ID
-    style: 'mapbox://styles/mapbox/streets-v12', // style URL
-    center: [1,1], // starting position [lng, lat]
-    zoom: 1 // starting 
-   
-    
+              document.getElementById("mos") .style.display = "none"
+              document.getElementById("ocul") .style.display = "block"
+              document.getElementById("map") .style.display = "block"
+              document.getElementById('map').style.visibility = "visible";
 
-  }); 
-
-  
-  
-
-
- 
-     map.on('load', () => {
-// Load an image from an external URL.
-map.loadImage(
-'https://cdn-icons-png.flaticon.com/128/595/595562.png',
-(error, image) => {
-if (error) throw error;
- 
-// Add the image to the map style.
-map.addImage('cat', image);
- 
-// Add a data source containing one point feature.
-map.addSource('point', {
-'type': 'geojson',
-'data': {
-'type': 'FeatureCollection',
-'features': [
-{
-'type': 'Feature',
-'geometry': {
-'type': 'Point',
-'coordinates': [1,1]
-}
-}
-]
-}
-});
- 
-// Add a layer to use the image to represent the data.
-       map.addLayer({
-          'id': 'points',
-          'type': 'symbol',
-          'source': 'point', // reference the data source
-          'layout': {
-          'icon-image': 'cat', // reference the image
-          'icon-size': 0.25
-                            }
-                      });
-                                 }
-          );
-            });
-
-              });
- 
-
- 
-   crearbtn.addEventListener("click", async () => {
-     try {
-         await setDoc(doc(db, "users", NombreCom.value),
-          {
-                    
-          usuario:NombreCom.value,
-          nombre:Edd.value,
-          
-           });
+              
+              mapboxgl.accessToken = 'pk.eyJ1IjoiaWFtY2FybG9zZnQiLCJhIjoiY2xkdnV2cmF5MDE3bDNvanFmcGRqZ2d4cCJ9.ohJtRP33084CwLYUx-NT_w';
+              const map = new mapboxgl.Map({
+                container: 'map', // container ID
+                style: 'mapbox://styles/mapbox/streets-v12', // style URL
+                center: [10,10], // starting position [lng, lat]
+                zoom: 7 // starting 
+              
                 
-             alert(`gracias ${NombreCom.value} ah sido agregado a la base de datos!`);
-                } catch (error) {
-                    alert('error desconocido');
 
-                   
+              }); 
+
+
+              
+
+
+
+              const marker = new mapboxgl.Marker({
+                draggable: true
+                })
+                .setLngLat([10, 10])
+                .addTo(map);
+                
+                function onDragEnd() {
+                const lngLat = marker.getLngLat();
+                coordinates.style.display = 'block'; 
+                coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
+                document.getElementById('lng-lat').value = lngLat.lng
+                document.getElementById('lng-long').value = lngLat.lat
+               
                 }
+               
+                
+                marker.on('dragend', onDragEnd);
 
+                
+
+
+                }); 
+
+     
+                
+
+              crearbtn.addEventListener("click", async () => {
+                // Verificar si el nombre de usuario ya existe
+                const docRef = doc(db, "users", NombreCom.value);
+                const docSnap = await getDoc(docRef);
+                ;
+                if (docSnap.exists()) {
+                    alert(`El nombre de usuario ${NombreCom.value} ya está en uso. Por favor, elija otro nombre de usuario.`);
+                    /* document.getElementById('juego').style.display= "block"; */
+                    return;
+                }
+            
+                // Si el nombre de usuario no existe, crear el nuevo usuario
+                try {
+                    await setDoc(docRef, {
+                        usuario: NombreCom.value,
+                        nombre: Edd.value,
+                        logitud:document.getElementById('lng-lat').value,
+                        latitud:document.getElementById('lng-long').value,
+                        puntuacion:document.getElementById('scoree').value 
+                      
+                        
+                    });
+                    alert(`Gracias ${NombreCom.value} ha sido agregado a la base de datos!`);
+                } catch (error) {
+                    alert('o al agregar el usuario.' + error);
+                }
             });
 
 
+           
+           
 
-            ocultbd.addEventListener('click', function () {
+
+           /*  ocultbd.addEventListener('click', function () {
               
               document.getElementById('tabla_db').style.display="none"
               document.getElementById('nomCom').value = "";
@@ -388,10 +388,10 @@ map.addSource('point', {
                             
             })
 
-
+ */
 
             
-          STATUS.addEventListener("click", async () => {
+ /*          STATUS.addEventListener("click", async () => {
             document.getElementById('tabla_db').style.display="block"
             document.getElementById('tabla_base').style.display="block"
             document.getElementById('oculBD').style.display="block"
@@ -423,7 +423,7 @@ map.addSource('point', {
                 });
 
                 
-            });
+            }); */
             
 
 
@@ -435,6 +435,9 @@ map.addSource('point', {
         if (docSnap.exists()) {
             NombreCom.value = docSnap.data().usuario;
             Edd.value = docSnap.data().nombre;
+            document.getElementById('lng-lat').value=docSnap.data().longitud;
+            document.getElementById('lng-long').value=docSnap.data().latitud;
+            document.getElementById('scoree').value=docSnap.data().puntuacion;
            
               alert("documento encontrado" );
           } 
@@ -455,6 +458,9 @@ map.addSource('point', {
               await updateDoc(elementRef, {
                 usuario: NombreCom.value,
                 nombre: Edd.value,
+                logitud:document.getElementById('lng-lat').value,
+                latitud:document.getElementById('lng-long').value,
+                puntuacion:score
                 
               });
               alert("Cambios guardados");
@@ -472,7 +478,7 @@ map.addSource('point', {
 
 
     
- 
+
 
 
 
