@@ -434,6 +434,7 @@ ocult_btn.addEventListener('click', function (){
         if (docSnap.exists()) {
             NombreCom.value = docSnap.data().usuario;
             Edd.value = docSnap.data().nombre;
+            
             document.getElementById('lng-lat').value=docSnap.data().longitud;
             document.getElementById('lng-long').value=docSnap.data().latitud;
             document.getElementById('scoree').value=docSnap.data().puntuacion;
